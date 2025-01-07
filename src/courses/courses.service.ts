@@ -116,7 +116,7 @@ export class CoursesService {
     }
 
     const existingEnrollment = await prisma.courseEnrollment.findFirst({
-      where: { userId: studentId, courseId }, // ✅ Perbaikan di sini!
+      where: { userId: studentId, courseId }, 
     });
 
     if (existingEnrollment) {

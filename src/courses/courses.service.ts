@@ -164,7 +164,7 @@ export class CoursesService {
     const enrolledCourses = await prisma.courseEnrollment.findMany({
       where: { userId: studentId },
       select: {
-        enrolledAt: true, // ✅ Pastikan ini ada
+        enrolledAt: true, 
         course: {
           select: {
             id: true,

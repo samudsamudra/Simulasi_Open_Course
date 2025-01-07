@@ -21,7 +21,6 @@ import { Role } from '../auth/roles.enum';
 export class CoursesController {
   constructor(private readonly coursesService: CoursesService) {}
 
-  // ✅ Pastikan ini ditaruh sebelum @Get(':id')
   @Get('available')
   async getAllAvailableCourses() {
     return this.coursesService.getAllAvailableCourses();
@@ -40,7 +39,6 @@ export class CoursesController {
     return this.coursesService.getStudentCourses(req.user.id);
   }
 
-  // ✅ Pindahkan ke bawah agar tidak salah membaca "available" sebagai ID
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const courseId = parseInt(id, 10);

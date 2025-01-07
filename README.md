@@ -41,8 +41,8 @@ npm install
 ### 3️⃣ **Setup File `.env`**
 Buat file `.env` di root folder dengan isi berikut:
 ```
-DATABASE_URL=mysql://root@localhost:3306/e_learning
-JWT_SECRET=samudra_punya_kunci
+DATABASE_URL=(sesuaikan)
+JWT_SECRET=(sesuaikan)
 ```
 
 ### 4️⃣ **Setup Database**

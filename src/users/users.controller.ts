@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Patch, Delete, Param, Body, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Param,
+  Body,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
@@ -24,7 +34,7 @@ export class UsersController {
   async createUser(
     @Body('email') email: string,
     @Body('password') password: string,
-    @Body('role') role: string,
+    @Body('role') role: string
   ) {
     return this.usersService.createUser(email, password, role);
   }
@@ -35,7 +45,7 @@ export class UsersController {
     @Param('id') id: string,
     @Body('email') email?: string,
     @Body('password') password?: string,
-    @Body('role') role?: string,
+    @Body('role') role?: string
   ) {
     return this.usersService.updateUser(Number(id), email, password, role);
   }

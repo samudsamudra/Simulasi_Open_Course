@@ -9,7 +9,14 @@ import { QuizzesModule } from './quizzes/quizzes.module';
 import { CertificatesModule } from './certificates/certificates.module';
 
 @Module({
-  imports: [UsersModule, CoursesModule, AuthModule,SubmissionsModule,QuizzesModule,CertificatesModule],
+  imports: [
+    UsersModule,
+    CoursesModule,
+    AuthModule,
+    SubmissionsModule,
+    QuizzesModule,
+    CertificatesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

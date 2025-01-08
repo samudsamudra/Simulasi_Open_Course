@@ -1,18 +1,12 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Param,
-  UseGuards,
-  Request,
-  BadRequestException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Controller, Get, Post, Param, UseGuards, Request, BadRequestException, NotFoundException, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { CertificatesService } from './certificates.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Controller('certificates')
-@UseGuards(JwtAuthGuard) // Menggunakan autentikasi JWT
+@UseGuards(JwtAuthGuard)
 export class CertificatesController {
   constructor(private readonly certificatesService: CertificatesService) {}
 
@@ -38,12 +32,17 @@ export class CertificatesController {
       throw new BadRequestException('User tidak terautentikasi.');
     }
 
-    const certificates =
-      await this.certificatesService.getUserCertificates(userId);
-    if (!certificates.data.length) {
-      throw new NotFoundException('Anda belum memiliki sertifikat.');
+    return this.certificatesService.getUserCertificates(userId);
+  }
+
+  @Get('download/:userId/:courseId')
+  async downloadCertificate(@Param('userId') userId: string, @Param('courseId') courseId: string, @Res() res: Response) {
+    const filePath = path.join(process.cwd(), `public/certificates/${userId}_${courseId}.pdf`);
+
+    if (!fs.existsSync(filePath)) {
+      throw new NotFoundException('Sertifikat tidak ditemukan.');
     }
 
-    return certificates;
+    return res.download(filePath);
   }
 }

@@ -59,13 +59,13 @@ model Submission {
 }
 
 model Certificate {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  courseId  Int
-  issuedAt  DateTime @default(now())
+  id       Int      @id @default(autoincrement())
+  userId   Int
+  courseId Int
+  issuedAt DateTime @default(now())
 
-  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  course    Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   @@unique([userId, courseId])
 }
@@ -81,6 +81,7 @@ model User {
   courses      CourseEnrollment[]
   submissions  Submission[]
   certificates Certificate[]
+  review       Review[]
 }
 
 model Course {
@@ -95,4 +96,19 @@ model Course {
   enrollments  CourseEnrollment[]
   quizzes      Quiz[]
   certificates Certificate[]
+  review       Review[]
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  courseId  Int
+  rating    Int // Nilai rating antara 1-5
+  comment   String? // Komentar opsional
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId]) // Student hanya bisa memberikan 1 review per course
 }

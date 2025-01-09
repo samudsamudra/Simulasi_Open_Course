@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { SubmissionsModule } from './submissions/submissions.module';
 import { QuizzesModule } from './quizzes/quizzes.module';
 import { CertificatesModule } from './certificates/certificates.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { CertificatesModule } from './certificates/certificates.module';
     SubmissionsModule,
     QuizzesModule,
     CertificatesModule,
+    ReviewsModule
   ],
   controllers: [AppController],
   providers: [AppService],
